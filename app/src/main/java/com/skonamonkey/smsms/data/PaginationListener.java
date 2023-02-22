@@ -1,4 +1,4 @@
-package com.ibnux.smsgateway.data;
+package com.skonamonkey.smsms.data;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;

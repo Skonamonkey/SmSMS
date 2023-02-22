@@ -1,6 +1,6 @@
-package com.ibnux.smsgateway.layanan;
+package com.skonamonkey.smsms.layanan;
 
-import static com.ibnux.smsgateway.layanan.PushService.writeLog;
+import static com.skonamonkey.smsms.layanan.PushService.writeLog;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -38,7 +38,10 @@ public class SmsListener extends BroadcastReceiver {
                 writeLog("SMS: RECEIVED : " + messageFrom + " " + messageBody,context);
                 if(url!=null){
                     if(sp.getBoolean("gateway_on",true)) {
-                        sendPOST(url, messageFrom, messageBody,"received",context);
+                        String tk = sp.getString("token", null);
+                       // sendPOST(url, messageFrom, tk,"token", context);
+                        sendPOST(url, messageFrom, messageBody,"received", context);
+
                     }else{
                         writeLog("GATEWAY OFF: SMS NOT POSTED TO SERVER", context);
                     }
@@ -107,15 +110,17 @@ public class SmsListener extends BroadcastReceiver {
     }
 
 
-    public static void sendPOST(String urlPost,String from, String msg,String tipe,Context context){
+    public static void sendPOST(String urlPost,String from, String msg,String tipe, Context context){
         if(urlPost==null) return;
         if(from.isEmpty()) return;
         if(!urlPost.startsWith("http")) return;
         try {
+            //String tk = sp.getString("Token",null);
             new postDataTask().execute(urlPost,
                     "number="+URLEncoder.encode(from, "UTF-8")+
                             "&message="+URLEncoder.encode(msg, "UTF-8")+
-                            "&type="+URLEncoder.encode(tipe, "UTF-8")
+                            "&type="+URLEncoder.encode(tipe, "UTF-8")+
+                            "&tk="+URLEncoder.encode("Test","UTF-8")
             );
         }catch (Exception e){
             e.printStackTrace();

@@ -1,4 +1,4 @@
-package com.ibnux.smsgateway;
+package com.skonamonkey.smsms;
 
 /**
  * Created by Ibnu Maksum 2020
@@ -38,13 +38,13 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
-import com.ibnux.smsgateway.Utils.Fungsi;
-import com.ibnux.smsgateway.data.LogAdapter;
-import com.ibnux.smsgateway.data.LogLine;
-import com.ibnux.smsgateway.data.PaginationListener;
-import com.ibnux.smsgateway.layanan.BackgroundService;
-import com.ibnux.smsgateway.layanan.PushService;
-import com.ibnux.smsgateway.layanan.UssdService;
+import com.skonamonkey.smsms.Utils.Fungsi;
+import com.skonamonkey.smsms.data.LogAdapter;
+import com.skonamonkey.smsms.data.LogLine;
+import com.skonamonkey.smsms.data.PaginationListener;
+import com.skonamonkey.smsms.layanan.BackgroundService;
+import com.skonamonkey.smsms.layanan.PushService;
+import com.skonamonkey.smsms.layanan.UssdService;
 import com.karumi.dexter.Dexter;
 import com.karumi.dexter.MultiplePermissionsReport;
 import com.karumi.dexter.PermissionToken;
@@ -173,9 +173,9 @@ public class MainActivity extends AppCompatActivity {
 
     public void updateInfo(){
         SharedPreferences sp = getSharedPreferences("pref",0);
-        infoTxt = "Your Secret \n\n"+sp.getString("secret",null)+
-                "\n\nYour Device ID \n\n"+
-                sp.getString("token","Pull to refresh again, to get token")+"\n";
+        infoTxt = "Your Device Secret \n\n"+sp.getString("secret",null)+
+                "\n\nYour Device Token \n\n"+
+                sp.getString("token","Generate Secure key to Get Token then Pull to Refresh")+"\n";
     }
 
     public void checkServices(){
@@ -258,8 +258,8 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             case R.id.menu_change_secret:
                 new AlertDialog.Builder(this)
-                        .setTitle("Change Secret")
-                        .setMessage("This will denied previous secret, every sms with previous secret ")
+                        .setTitle("Register / Create Device Secret")
+                        .setMessage("This will Prevent Reporting of Previous SMS Messages.")
                         .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
                                 getSharedPreferences("pref",0).edit().putString("secret", UUID.randomUUID().toString()).commit();
@@ -274,10 +274,10 @@ public class MainActivity extends AppCompatActivity {
             case R.id.menu_set_url:
                 AlertDialog.Builder builder2 = new AlertDialog.Builder(this);
                 builder2.setTitle("Change URL for receiving SMS");
-                builder2.setMessage("Data will send using POST with parameter number and message and type=received/sent/delivered/ussd");
+                builder2.setMessage("Data will send using POST with parameter number and message and type=received/sent/delivered/ussd/token");
                 final EditText input2 = new EditText(this);
                 input2.setText(getSharedPreferences("pref",0).getString("urlPost",""));
-                input2.setHint("https://sms.ibnux.net");
+                input2.setHint("https://skonamonkey.co.uk/heartbeat.php");
                 input2.setMaxLines(1);
                 input2.setInputType(InputType.TYPE_TEXT_VARIATION_URI | InputType.TYPE_TEXT_VARIATION_WEB_EDIT_TEXT);
                 builder2.setView(input2);

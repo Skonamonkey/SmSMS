@@ -1,4 +1,4 @@
-package com.ibnux.smsgateway.data;
+package com.skonamonkey.smsms.data;
 
 public class UssdData {
     public String to ="";

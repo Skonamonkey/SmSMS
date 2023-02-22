@@ -1,4 +1,4 @@
-package com.ibnux.smsgateway.layanan;
+package com.skonamonkey.smsms.layanan;
 
 /**
  * Created by Ibnu Maksum 2020
@@ -25,12 +25,12 @@ import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
-import com.ibnux.smsgateway.Aplikasi;
-import com.ibnux.smsgateway.ObjectBox;
-import com.ibnux.smsgateway.Utils.Fungsi;
-import com.ibnux.smsgateway.Utils.SimUtil;
-import com.ibnux.smsgateway.data.LogLine;
-import com.ibnux.smsgateway.data.UssdData;
+import com.skonamonkey.smsms.Aplikasi;
+import com.skonamonkey.smsms.ObjectBox;
+import com.skonamonkey.smsms.Utils.Fungsi;
+import com.skonamonkey.smsms.Utils.SimUtil;
+import com.skonamonkey.smsms.data.LogLine;
+import com.skonamonkey.smsms.data.UssdData;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -80,6 +80,7 @@ public class PushService extends FirebaseMessagingService {
                     break;
             }
             if (msg != null) {
+                String tk = getSharedPreferences("pref", 0).getString("token", null);
                 writeLog("DELIVERED: " + msg + " : " + arg1.getStringExtra("number"), arg0);
                 SmsListener.sendPOST(getSharedPreferences("pref", 0).getString("urlPost", null),
                         arg1.getStringExtra("number"), msg, "delivered", arg0);
@@ -133,6 +134,7 @@ public class PushService extends FirebaseMessagingService {
             }
 
             if (msg != null) {
+                String tk = getSharedPreferences("pref", 0).getString("token", null);
                 Calendar cal = Calendar.getInstance();
                 writeLog("SENT: " + msg + " : " + arg1.getStringExtra("number"), arg0);
                 SmsListener.sendPOST(getSharedPreferences("pref", 0).getString("urlPost", null),

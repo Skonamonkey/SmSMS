@@ -1,4 +1,4 @@
-package com.ibnux.smsgateway.Utils;
+package com.skonamonkey.smsms.Utils;
 
 import android.content.Context;
 import android.telephony.TelephonyManager;

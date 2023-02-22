@@ -1,0 +1,6 @@
+Enable Cloud Messaging
+From your Firebase console, go to Project Settings and open the Cloud Messaging tab
+If any API is not enabled, for the API that is disabled click the three dots menu on the right and select "Manage API"
+In the Google Cloud Console page that opens, click the "Enable" button.
+- this INCLUDES the Cloud messaging (Legacy) Api
+

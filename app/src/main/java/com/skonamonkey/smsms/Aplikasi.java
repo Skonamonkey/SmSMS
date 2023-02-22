@@ -1,4 +1,4 @@
-package com.ibnux.smsgateway;
+package com.skonamonkey.smsms;
 
 /**
  * Created by Ibnu Maksum 2020
@@ -24,6 +24,7 @@ public class Aplikasi extends Application {
         secret = sp.getString("secret",null);
         if(secret==null){
             secret = UUID.randomUUID().toString();
+            //secret = "ABC123";
             sp.edit().putString("secret", secret).apply();
         }
     }

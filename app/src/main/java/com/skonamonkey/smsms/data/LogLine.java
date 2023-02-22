@@ -1,4 +1,4 @@
-package com.ibnux.smsgateway.data;
+package com.skonamonkey.smsms.data;
 
 import io.objectbox.annotation.Entity;
 import io.objectbox.annotation.Id;

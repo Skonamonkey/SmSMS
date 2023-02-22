@@ -1,4 +1,4 @@
-package com.ibnux.smsgateway.Utils;
+package com.skonamonkey.smsms.Utils;
 
 import android.app.PendingIntent;
 import android.content.Context;
@@ -9,7 +9,7 @@ import android.telephony.SmsManager;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 
-import com.ibnux.smsgateway.layanan.PushService;
+import com.skonamonkey.smsms.layanan.PushService;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;

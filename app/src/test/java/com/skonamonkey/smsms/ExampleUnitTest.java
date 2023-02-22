@@ -1,4 +1,4 @@
-package com.ibnux.smsgateway;
+package com.skonamonkey.smsms;
 
 import static org.junit.Assert.assertEquals;
 

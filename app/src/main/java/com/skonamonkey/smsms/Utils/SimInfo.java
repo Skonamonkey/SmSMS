@@ -1,4 +1,4 @@
-package com.ibnux.smsgateway.Utils;
+package com.skonamonkey.smsms.Utils;
 
 public class SimInfo {
     private int id_;

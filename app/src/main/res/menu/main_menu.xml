@@ -12,7 +12,7 @@
         android:title="Change expired" />
     <item
         android:id="@+id/menu_change_secret"
-        android:title="Change Secret" />
+        android:title="Generate Secure Key" />
 
     <item
         android:id="@+id/menu_set_url"
@@ -28,10 +28,12 @@
 
     <item
         android:id="@+id/menu_ussd_set"
-        android:title="USSD Permission" />
+        android:title="USSD Permission"
+        android:visible="false" />
 
     <item
         android:id="@+id/menu_ussd_test"
-        android:title="Test USSD" />
+        android:title="Test USSD"
+        android:visible="false" />
 
 </menu>

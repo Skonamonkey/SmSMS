@@ -1,8 +1,8 @@
-package com.ibnux.smsgateway;
+package com.skonamonkey.smsms;
 
 import android.content.Context;
 
-import com.ibnux.smsgateway.data.MyObjectBox;
+import com.skonamonkey.smsms.data.MyObjectBox;
 
 import io.objectbox.BoxStore;
 

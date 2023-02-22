@@ -1,4 +1,4 @@
-package com.ibnux.smsgateway.Utils;
+package com.skonamonkey.smsms.Utils;
 
 /**
  * Created by Ibnu Maksum 2020
@@ -23,11 +23,11 @@ import android.util.Log;
 
 import androidx.core.app.NotificationCompat;
 
-import com.ibnux.smsgateway.Aplikasi;
-import com.ibnux.smsgateway.MainActivity;
-import com.ibnux.smsgateway.R;
-import com.ibnux.smsgateway.layanan.PushService;
-import com.ibnux.smsgateway.layanan.UssdService;
+import com.skonamonkey.smsms.Aplikasi;
+import com.skonamonkey.smsms.MainActivity;
+import com.skonamonkey.smsms.R;
+import com.skonamonkey.smsms.layanan.PushService;
+import com.skonamonkey.smsms.layanan.UssdService;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -102,7 +102,7 @@ public class Fungsi {
             mNotificationManager = (NotificationManager) Aplikasi.app.getSystemService(Context.NOTIFICATION_SERVICE);
         if(Build.VERSION.SDK_INT>25) {
 
-            NotificationChannel androidChannel = new NotificationChannel("com.ibnux.smsgateway",
+            NotificationChannel androidChannel = new NotificationChannel("com.skonamonkey.smsms",
                     "SMS Notifikasi", NotificationManager.IMPORTANCE_LOW);
             androidChannel.enableLights(false);
             androidChannel.enableVibration(false);
@@ -113,7 +113,7 @@ public class Fungsi {
 
         PendingIntent contentIntent = PendingIntent.getActivity(Aplikasi.app, 0, new Intent(Aplikasi.app, MainActivity.class), 0);
 
-        NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(Aplikasi.app,"com.ibnux.smsgateway")
+        NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(Aplikasi.app,"com.skonamonkey.smsms")
                 .setSmallIcon(R.mipmap.ic_launcher)
                 .setContentTitle(Aplikasi.app.getText(R.string.app_name))
                 .setStyle(new NotificationCompat.BigTextStyle()

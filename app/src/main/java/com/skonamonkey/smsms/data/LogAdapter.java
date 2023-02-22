@@ -1,4 +1,4 @@
-package com.ibnux.smsgateway.data;
+package com.skonamonkey.smsms.data;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,9 +8,9 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.ibnux.smsgateway.ObjectBox;
-import com.ibnux.smsgateway.R;
-import com.ibnux.smsgateway.Utils.Fungsi;
+import com.skonamonkey.smsms.ObjectBox;
+import com.skonamonkey.smsms.R;
+import com.skonamonkey.smsms.Utils.Fungsi;
 
 import java.util.List;
 

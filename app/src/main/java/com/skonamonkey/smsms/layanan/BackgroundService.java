@@ -1,4 +1,4 @@
-package com.ibnux.smsgateway.layanan;
+package com.skonamonkey.smsms.layanan;
 
 /**
  * Created by Ibnu Maksum 2020
@@ -19,10 +19,10 @@ import android.os.IBinder;
 import androidx.core.app.NotificationCompat;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
-import com.ibnux.smsgateway.Aplikasi;
-import com.ibnux.smsgateway.MainActivity;
-import com.ibnux.smsgateway.R;
-import com.ibnux.smsgateway.Utils.Fungsi;
+import com.skonamonkey.smsms.Aplikasi;
+import com.skonamonkey.smsms.MainActivity;
+import com.skonamonkey.smsms.R;
+import com.skonamonkey.smsms.Utils.Fungsi;
 
 public class BackgroundService extends Service {
 

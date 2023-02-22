@@ -1,4 +1,4 @@
-package com.ibnux.smsgateway.layanan;
+package com.skonamonkey.smsms.layanan;
 
 /**
  * Created by Ibnu Maksum 2020

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">SMS Gateway</string>
+    <string name="app_name">Skonamonkey SMS</string>
     <string name="accessibility_desc">Listen to USSD Request and send it to server</string>
     <string name="uri_scheme">ussd</string>
     <string name="uri_authority">cd</string>
