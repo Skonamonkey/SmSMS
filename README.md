@@ -1,9 +1,7 @@
 
-# Android SMS Gateway  
-  
-This is recreate from [Old SMS Gateway](https://github.com/anjlab/android-sms-gateway)  
-now using Firebase  
-to turn my android as sms sender
+# SmSMS  
+
+This is a Fork of ibnux's SMS gateway - Primarily for my own experementation for now, but this may change later.
 
 # HOW IT WORKS
 
@@ -23,6 +21,7 @@ RECEIVE SMS
   
 Download APK from [release](https://github.com/ibnux/Android-SMS-Gateway/releases) page  
   then open https://sms.ibnux.net/ to learn how to send sms
+--- I have compiled my own App - and am in the middle of creating my own Server API - These instructions will be updated later.
 
 you can find backend folder for server side in this source
 
