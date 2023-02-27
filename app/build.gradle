@@ -3,13 +3,13 @@ apply plugin: 'com.google.gms.google-services'
 apply plugin: 'io.objectbox'
 
 android {
-    compileSdkVersion 33
+    compileSdkVersion 31
     buildToolsVersion "29.0.2"
     defaultConfig {
         //change applicationId if you want to use your own Firebase
         applicationId "com.skonamonkey.smsms"
         minSdkVersion 16
-        targetSdkVersion 33
+        targetSdkVersion 31
         versionCode 5
         versionName '3.0.2'
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
