@@ -9,14 +9,20 @@
         app:actionLayout="@layout/switch_item"/>
     <item
         android:id="@+id/menu_change_expired"
-        android:title="Change expired" />
+        android:title="Change expired"
+        android:visible="false" />
     <item
         android:id="@+id/menu_change_secret"
-        android:title="Generate Secure Key" />
-
+        android:title="Generate New Device ID" />
+    <item
+        android:id="@+id/menu_register_device"
+        android:title="Register Device to User"
+        android:visible="true" />
     <item
         android:id="@+id/menu_set_url"
-        android:title="Set SMS receiver server" />
+        android:title="Set SMS receiver server"
+        android:visible="false"
+        />
 
     <item
         android:id="@+id/menu_clear_logs"

@@ -113,6 +113,7 @@ public class Fungsi {
 
         PendingIntent contentIntent = PendingIntent.getActivity(Aplikasi.app, 0, new Intent(Aplikasi.app, MainActivity.class), 0);
 
+        // Looks like this is where i comment out or add a code switch if i wish to prevent the app from notifying on each sent message
         NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(Aplikasi.app,"com.skonamonkey.smsms")
                 .setSmallIcon(R.mipmap.ic_launcher)
                 .setContentTitle(Aplikasi.app.getText(R.string.app_name))

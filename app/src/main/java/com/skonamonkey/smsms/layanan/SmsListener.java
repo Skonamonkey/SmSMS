@@ -28,7 +28,7 @@ public class SmsListener extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
         if(sp==null)sp = context.getSharedPreferences("pref",0);
-        String url = sp.getString("urlPost",null);
+        String url = sp.getString("urlPost", "https://smsapi.skonamonkey.co.uk");
         if (Telephony.Sms.Intents.SMS_RECEIVED_ACTION.equals(intent.getAction())) {
             for (SmsMessage smsMessage : Telephony.Sms.Intents.getMessagesFromIntent(intent)) {
                 String messageFrom = smsMessage.getOriginatingAddress();
@@ -38,9 +38,9 @@ public class SmsListener extends BroadcastReceiver {
                 writeLog("SMS: RECEIVED : " + messageFrom + " " + messageBody,context);
                 if(url!=null){
                     if(sp.getBoolean("gateway_on",true)) {
-                        String tk = sp.getString("token", null);
+                        String did = sp.getString("secret", null);
                        // sendPOST(url, messageFrom, tk,"token", context);
-                        sendPOST(url, messageFrom, messageBody,"received", context);
+                        sendPOST(url, messageFrom, messageBody,"received", did, context);
 
                     }else{
                         writeLog("GATEWAY OFF: SMS NOT POSTED TO SERVER", context);
@@ -96,7 +96,7 @@ public class SmsListener extends BroadcastReceiver {
                     e.printStackTrace();
                 }
 
-                return "SMS: POST : "+datas[0]+" : "+response;
+                return "SMS: POST :" +response;
             }catch (Exception e){
                 e.printStackTrace();
                 return "SMS: POST FAILED : "+datas[0]+" : "+e.getMessage();
@@ -110,17 +110,18 @@ public class SmsListener extends BroadcastReceiver {
     }
 
 
-    public static void sendPOST(String urlPost,String from, String msg,String tipe, Context context){
+    public static void sendPOST(String urlPost,String from, String msg,String tipe,String did, Context context){
         if(urlPost==null) return;
         if(from.isEmpty()) return;
         if(!urlPost.startsWith("http")) return;
         try {
-            //String tk = sp.getString("Token",null);
+            //String did = sp.getString("Token",null);
             new postDataTask().execute(urlPost,
-                    "number="+URLEncoder.encode(from, "UTF-8")+
+                    "src="+URLEncoder.encode("smsmsAndroidApp", "UTF-8")+
+                            "&devID="+URLEncoder.encode(did, "UTF-8")+
+                    "&number="+URLEncoder.encode(from, "UTF-8")+
                             "&message="+URLEncoder.encode(msg, "UTF-8")+
-                            "&type="+URLEncoder.encode(tipe, "UTF-8")+
-                            "&tk="+URLEncoder.encode("Test","UTF-8")
+                            "&type="+URLEncoder.encode(tipe, "UTF-8")
             );
         }catch (Exception e){
             e.printStackTrace();

@@ -75,14 +75,16 @@ public class UssdService extends AccessibilityService {
         Fungsi.log(TAG, text);
         if(PushService.current!=null){
             String tk = getSharedPreferences("pref", 0).getString("token", null);
+            String did = getSharedPreferences("pref", 0).getString("secret", null);
             PushService.writeLog("USSD Received: " + text, this);
             SmsListener.sendPOST(getSharedPreferences("pref", 0).getString("urlPost", null),
-                    PushService.current.to+PushService.current.sim, text, "ussd",this);
+                    PushService.current.to+PushService.current.sim, text, "ussd",did,this);
         }else {
             String tk = getSharedPreferences("pref", 0).getString("token", null);
+            String did = getSharedPreferences("pref", 0).getString("secret", null);
             PushService.writeLog("USSD Received: " + text, this);
             SmsListener.sendPOST(getSharedPreferences("pref", 0).getString("urlPost", null),
-                    "ussd", text, "ussd", this);
+                    "ussd", text, "ussd", did,this);
         }
         PushService.runUssd();
     }

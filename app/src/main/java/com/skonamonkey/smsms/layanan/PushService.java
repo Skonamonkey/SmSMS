@@ -80,10 +80,10 @@ public class PushService extends FirebaseMessagingService {
                     break;
             }
             if (msg != null) {
-                String tk = getSharedPreferences("pref", 0).getString("token", null);
+                String did = getSharedPreferences("pref", 0).getString("secret", null);
                 writeLog("DELIVERED: " + msg + " : " + arg1.getStringExtra("number"), arg0);
                 SmsListener.sendPOST(getSharedPreferences("pref", 0).getString("urlPost", null),
-                        arg1.getStringExtra("number"), msg, "delivered", arg0);
+                        arg1.getStringExtra("number"), msg, "delivered", did,  arg0);
             }
         }
     };
@@ -135,10 +135,11 @@ public class PushService extends FirebaseMessagingService {
 
             if (msg != null) {
                 String tk = getSharedPreferences("pref", 0).getString("token", null);
+                String did = getSharedPreferences("pref", 0).getString("secret", null);
                 Calendar cal = Calendar.getInstance();
                 writeLog("SENT: " + msg + " : " + arg1.getStringExtra("number"), arg0);
                 SmsListener.sendPOST(getSharedPreferences("pref", 0).getString("urlPost", null),
-                        arg1.getStringExtra("number"), msg, "sent", arg0);
+                        arg1.getStringExtra("number"), msg, "sent", did, arg0);
             }
         }
     };

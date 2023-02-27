@@ -4,6 +4,9 @@ package com.skonamonkey.smsms;
  * Created by Ibnu Maksum 2020
  */
 
+import static com.skonamonkey.smsms.layanan.PushService.context;
+import static com.skonamonkey.smsms.layanan.PushService.writeLog;
+
 import android.Manifest;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -38,6 +41,12 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.skonamonkey.smsms.Utils.Fungsi;
 import com.skonamonkey.smsms.data.LogAdapter;
 import com.skonamonkey.smsms.data.LogLine;
@@ -51,7 +60,9 @@ import com.karumi.dexter.PermissionToken;
 import com.karumi.dexter.listener.PermissionRequest;
 import com.karumi.dexter.listener.multi.MultiplePermissionsListener;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 public class MainActivity extends AppCompatActivity {
@@ -67,6 +78,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
 
         recyclerview = findViewById(R.id.recyclerview);
         editTextSearch = findViewById(R.id.editTextSearch);
@@ -200,6 +212,8 @@ public class MainActivity extends AppCompatActivity {
         View view = MenuItemCompat.getActionView(menuItem);
         Switch switcha = view.findViewById(R.id.switchForActionBar);
         switcha.setChecked(getSharedPreferences("pref",0).getBoolean("gateway_on",true));
+        //volley
+        RequestQueue queue = Volley.newRequestQueue(this);
         switcha.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -298,6 +312,93 @@ public class MainActivity extends AppCompatActivity {
 
                 builder2.show();
                 return true;
+
+
+            case R.id.menu_register_device:
+
+                //volley
+                RequestQueue queue = Volley.newRequestQueue(this);
+
+                String tk = getSharedPreferences("pref", 0).getString("token", null);
+                String devID = getSharedPreferences("pref", 0).getString("secret", null);
+                String urlPost = getSharedPreferences("pref", 0).getString("urlPost", "https://smsapi.skonamonkey.co.uk");
+
+
+                AlertDialog.Builder builder3 = new AlertDialog.Builder(this);
+            builder3.setTitle("Set Device User");
+            builder3.setMessage("Set User account this device is registered to");
+            final EditText input3 = new EditText(this);
+            input3.setText(getSharedPreferences("pref",0).getString("smUser",null));
+            input3.setHint("email@domain.com");
+            input3.setMaxLines(1);
+            input3.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS);
+            builder3.setView(input3);
+            builder3.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    String smUser = input3.getText().toString();
+                    String vURL = urlPost + "?src=smsmsAndroidApp&type=register&devID=" + devID;
+                    getSharedPreferences("pref",0).edit().putString("smUser", smUser).commit();
+                    //Toast.makeText(MainActivity.this,"SERVER URL changed",Toast.LENGTH_LONG).show();
+
+                    //Start Volley Stuff
+
+                    StringRequest postRequest = new StringRequest(Request.Method.POST, urlPost,
+                            new Response.Listener<String>()
+                            {
+                                @Override
+                                public void onResponse(String response) {
+                                    // response
+                                    Log.d("Response", response);
+                                    Toast.makeText(MainActivity.this,"Registered to " + smUser,Toast.LENGTH_LONG).show();
+                                    writeLog(response, context);
+                                }
+                            },
+                            new Response.ErrorListener()
+                            {
+                                @Override
+                                public void onErrorResponse(VolleyError error) {
+                                    // error
+                                    Log.d("Error.Response", "Unknown Error");
+                                    Toast.makeText(MainActivity.this,"Error Registering Device ",Toast.LENGTH_LONG).show();
+                                    writeLog("Error Registering Device :"+ devID , context);
+                                }
+                            }
+                    ) {
+                        @Override
+                        protected Map<String, String> getParams()
+                        {
+                            Map<String, String>  params = new HashMap<String, String>();
+                            params.put("src", "smsmsAndroidApp");
+                            params.put("smUser", smUser);
+                            params.put("devID", devID);
+                            params.put("tk", tk);
+                            params.put("type", "register");
+
+
+                            return params;
+                        }
+                    };
+                    queue.add(postRequest);
+
+
+
+
+                    //end Volley  Stuff
+                }
+            });
+            builder3.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.cancel();
+                }
+            });
+
+            builder3.show();
+            return true;
+
+
+
             case R.id.menu_clear_logs:
                 new AlertDialog.Builder(this)
                         .setTitle("Clear Logs")
